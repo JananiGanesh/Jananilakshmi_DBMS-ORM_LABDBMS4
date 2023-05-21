@@ -1,0 +1,1 @@
+Display the total number of customers based on gender who have placed orders of worth at least Rs.3000.

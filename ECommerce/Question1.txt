@@ -1,0 +1,58 @@
+An E-commerce website manages its data in the form of various tables.
+
+You are required to create tables for supplier,customer,category,product,supplier_pricing,order,rating to store the data for the E-commerce with the schema definition given below.
+
+Table:supplier
+Columns:
+SUPP_ID	INT PK
+SUPP_NAME	varchar(50) NOT NULL
+SUPP_CITY	varchar(50)
+NOT NULL
+SUPP_PHONE	varchar(50) NOT NULL
+
+Table:customer
+Columns:
+CUS_ID	INT PK
+CUS_NAME	VARCHAR(20) NOT NULL
+CUS_PHONE	VARCHAR(10) NOT NULL
+CUS_CITY	VARCHAR(30) NOT NULL
+CUS_GENDER	CHAR
+
+Table:category
+Columns:
+CAT_ID	INT PK
+CAT_NAME	VARCHAR(20) NOT NULL
+
+Table:product
+Columns:
+PRO_ID	INT PK
+PRO_NAME	VARCHAR(20) NOT NULL DEFAULT "Dummy"
+PRO_DESC	VARCHAR(60)
+CAT_ID	INT FK
+
+Table:supplier_pricing
+Columns:
+PRICING_ID	INT PK
+PRO_ID	INT FK
+SUPP_ID	INT FK
+SUPP_PRICE	INT DEFAULT 0
+
+Table:order
+Columns: 
+ORD_ID	INT PK
+ORD_AMOUNT	INT 
+NOT NULL
+ORD_DATE	DATE 
+NOT NULL
+CUS_ID	INT FK
+PRICING_ID	INT FK
+
+
+Table:rating
+Columns: (Rating provided in this table is common for product and supplier)
+RAT_ID	INT PK
+ORD_ID	INT FK
+RAT_RATSTARS	INT 
+NOT NULL
+
+

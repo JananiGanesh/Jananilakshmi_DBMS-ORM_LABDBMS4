@@ -1,0 +1,1 @@
+Display customer name and gender whose names start or end with character 'A'.
