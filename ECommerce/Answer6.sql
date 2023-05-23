@@ -1,12 +1,20 @@
 
-select C.CAT_ID, C.CAT_NAME, 
-Min(SP_P.MinPrice) as 'MinPrice'
- from Category C inner join (
-	select P.*, SP.MinPrice from product P inner join (
-		select pro_id, min(SUPP_PRICE) as MinPrice from supplier_pricing 
-		group by pro_id
-	) as SP
-	on P.pro_id = SP.PRO_ID
-) as SP_P
-on C.CAT_ID = SP_P.CAT_ID
-group by SP_P.CAT_ID
+
+Select C.cat_id as CategoryID, C.cat_name as CategoryName,
+P.pro_id as ProductID,P.pro_name as ProductName, SP.min_price as LeastPrice
+from Category C
+inner join product P ON C.cat_id = P.cat_id
+inner join  (
+    select C.cat_id, MIN(SP.supp_price) as min_price
+    from Category C
+    inner join product P on C.cat_id = P.cat_id
+    inner join supplier_pricing SP on P.pro_id = SP.pro_id
+    group by C.cat_id
+) as SP on C.cat_id = SP.cat_id AND P.pro_id = (
+    select P.pro_id
+	from product P
+    inner join supplier_pricing SP on P.pro_id = SP.pro_id
+    where C.cat_id = P.cat_id
+    order by SP.supp_price ASC
+    LIMIT 1
+);
